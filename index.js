@@ -52,7 +52,7 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
     }
 
  } 
- run().catch(error => console.log(error));
+ //run().catch(error => console.log(error));
 
 
 
