@@ -25,6 +25,7 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
     try{
         const userColection = client.db("reusedProducts").collection("categories");
         const  categoriesColection = client.db("reusedProducts").collection("productCategories");
+        const  allUserColection = client.db("reusedProducts").collection("userCollection");
 
         // get categories
         app.get('/categories', async(req,res) => {
@@ -44,6 +45,14 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
             const categories = await coursor.toArray();
             res.send(categories)
         
+        })
+
+        //
+        app.post('/userCollection', async(req,res) =>{
+            const users = req.body;
+            console.log(users)
+            const resualt = await allUserColection.insertOne(users)
+            res.send(resualt)
         })
  
     }
