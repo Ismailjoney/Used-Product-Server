@@ -36,7 +36,7 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
         
         })
         
-        //specifice all categorie id
+        //specifice all categorie id:
         app.get('/productCategories/:id', async(req,res) => {
             const id = req.params.id;
             console.log(id)
@@ -47,7 +47,7 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
         
         })
 
-        //
+        //buyer and seller collection
         app.post('/userCollection', async(req,res) =>{
             const users = req.body;
             console.log(users)
