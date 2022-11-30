@@ -52,22 +52,21 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
         app.post('/bookings', async (req, res) => {
             const booking = req.body;
             console.log(booking);
-            const query = {
-                // title: booking.title, 
-                // email: booking.email, 
-            }
+            const query = {}
             //const alreadyBooked = await bookingCollection.insertOne(query).toArray();
             const result = await bookingCollection.insertOne(booking);
             res.send(result);
         })
         //My order(booking)-------------------------------------
         app.get('/booking', async(req,res)=>{
+            const email = req.query.email;
+            console.log(email)
             const query = {
-                
+                 email: email
             };
-            const coursor = bookingCollection.find(query);
-            const booking = await coursor.toArray();
-            res.send(booking)
+            const coursor = await bookingCollection.find(query).toArray()
+            // const booking = await coursor.toArray();
+            res.send(coursor)
         })
         //buyer and seller collection
         app.post('/userCollection', async(req,res) =>{
