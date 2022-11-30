@@ -26,6 +26,8 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
         const userColection = client.db("reusedProducts").collection("categories");
         const  categoriesColection = client.db("reusedProducts").collection("productCategories");
         const  allUserColection = client.db("reusedProducts").collection("userCollection");
+        const bookingCollection = client.db("reusedProducts").collection("bookingCollection");
+       
 
         // get categories
         app.get('/categories', async(req,res) => {
@@ -46,7 +48,27 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
             res.send(categories)
         
         })
-
+        //booking collection:
+        app.post('/bookings', async (req, res) => {
+            const booking = req.body;
+            console.log(booking);
+            const query = {
+                // title: booking.title, 
+                // email: booking.email, 
+            }
+            //const alreadyBooked = await bookingCollection.insertOne(query).toArray();
+            const result = await bookingCollection.insertOne(booking);
+            res.send(result);
+        })
+        //My order(booking)-------------------------------------
+        app.get('/booking', async(req,res)=>{
+            const query = {
+                
+            };
+            const coursor = bookingCollection.find(query);
+            const booking = await coursor.toArray();
+            res.send(booking)
+        })
         //buyer and seller collection
         app.post('/userCollection', async(req,res) =>{
             const users = req.body;
