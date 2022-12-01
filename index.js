@@ -48,6 +48,13 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
             res.send(categories)
         
         })
+        //new product update
+        app.post('/productCategories', async(req,res) =>{
+            const users = req.body;
+            console.log(users)
+            const resualt = await categoriesColection.insertOne(users)
+            res.send(resualt)
+        })
         //booking collection:
         app.post('/bookings', async (req, res) => {
             const booking = req.body;
@@ -75,7 +82,7 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
             const resualt = await allUserColection.insertOne(users)
             res.send(resualt)
         })
- 
+        
     }
     finally{
 
